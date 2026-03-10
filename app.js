@@ -57,19 +57,32 @@ let db = [
 function authenticate(database, request) {
 
 	let foundUser = database.filter(usr => usr.email === request.email)
-	console.log(foundUser)
+
 	if (foundUser.length) {
 		if (foundUser[0].password === request.password) {
-			console.log("Logged in")
+			handleOutput("Logged In", ".msg")
 		} else {
-			console.log("Invalid password")
+			handleOutput("Invalid Password", ".msg")
 		}
 	} else {
-		console.log("No user, go away")
+		handleOutput("User not found", ".msg")
 	}
+}
+
+function handleOutput(msg, el) {
+	let dataOutput = document.querySelector(el)
+	dataOutput.textContent = msg
 }
 
 // 2. Apply your event listener and the type of event
 submit.addEventListener("click", event => {
+	// let email = event.target.form[1].value
+	// let pwd = event.target.form[2].value
 
+	let payload = {
+		email: event.target.form[1].value,
+		password: event.target.form[2].value
+	}
+	
+	authenticate(db, payload)
 })

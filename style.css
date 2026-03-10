@@ -26,3 +26,7 @@ input, button {
 .submit {
 	background-color: rgb(40, 111, 210);
 }
+
+.submit:hover {
+	background-color: rgb(10, 86, 192);
+}

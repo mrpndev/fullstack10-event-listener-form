@@ -13,12 +13,6 @@
 // 1. Grab an item you're trying to set an event listener on
 let submit = document.querySelector(".submit")
 
-// 2. Apply your event listener and the type of event
-submit.addEventListener("click", event => {
-	console.log(event)
-	event.target.style.color = "red"
-})
-
 /* 
 	? Big Scary Challenge
 	* create two more elements
@@ -30,3 +24,52 @@ submit.addEventListener("click", event => {
 	
 	! HARD MODE - instead of switch, change it to login/register based on input visibility
 */
+
+let authBtn = document.getElementsByClassName("flipAuth")[0]
+let fullName = document.querySelector("#fullName")
+
+function handleInput(input) {
+	input.target.textContent === "Register" ? input.target.textContent = "Login" : input.target.textContent = "Register"
+}
+
+function handleAuthBtn(btn) {
+	if (btn.style.display === "none") {
+		btn.style.display = "block"
+	} else {
+		btn.style.display = "none"
+	}
+}
+
+authBtn.addEventListener("click", (evt) => {
+	handleInput(evt)
+	handleAuthBtn(fullName)
+})
+
+// Business Logic of our Authentication Service
+let db = [
+	{ email: "paul@codecademy.com", password: "dbLocal"},
+	{ email: "scott@gmail.com", password: "Scotti3"},
+	{ email: "arush@google.com", password: "password"},
+	{ email: "rus@cyberexpert.com", password: "lakdh&)ldkx-dakhjlf"}
+]
+
+// Function is used to encapsulate reusable code
+function authenticate(database, request) {
+
+	let foundUser = database.filter(usr => usr.email === request.email)
+	console.log(foundUser)
+	if (foundUser.length) {
+		if (foundUser[0].password === request.password) {
+			console.log("Logged in")
+		} else {
+			console.log("Invalid password")
+		}
+	} else {
+		console.log("No user, go away")
+	}
+}
+
+// 2. Apply your event listener and the type of event
+submit.addEventListener("click", event => {
+
+})
